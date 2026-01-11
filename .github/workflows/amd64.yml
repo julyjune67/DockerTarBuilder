@@ -14,13 +14,17 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
-    - name: Free disk space
+    - name: Show disk before cleanup
+      run: df -h
+
+    - name: Aggressive cleanup for Docker pull
       run: |
-         rm -rf /usr/share/dotnet
-         rm -rf /opt/ghc
-         rm -rf /usr/local/lib/android
-         docker system prune -af
+       docker system prune --all --force --volumes
+       rm -rf /opt/hostedtoolcache       # 这个文件夹超级占地方，很多项目用不到
+       sudo rm -rf /usr/share/dotnet
+       sudo rm -rf /usr/local/lib/android
+       sudo rm -rf /usr/share/swift
+       df -h   
          
     - name: Clean up Docker to free space
       run: |
