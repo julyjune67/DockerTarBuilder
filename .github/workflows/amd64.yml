@@ -31,11 +31,9 @@ jobs:
        sudo rm -rf /usr/local/lib/android
        sudo rm -rf /usr/share/swift
        df -h   
-    - name: Show disk before cleanup
-       run: df -h /
 
     - name: Nuclear option - clean everything possible
-       run: |
+      run: |
        sudo swapoff -a || true
        sudo rm -f /swapfile || true
 
@@ -48,13 +46,13 @@ jobs:
                /usr/lib/jvm \
                /usr/local/lib/android/sdk || true
 
-    sudo docker system prune --all --force --volumes || true
-    sudo docker builder prune --all --force || true
+       sudo docker system prune --all --force --volumes || true
+       sudo docker builder prune --all --force || true
 
-    sudo apt-get clean
-    sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+       sudo apt-get clean
+       sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-    df -h /       
+       df -h /       
     - name: Clean up Docker to free space
       run: |
           docker system prune -a -f
