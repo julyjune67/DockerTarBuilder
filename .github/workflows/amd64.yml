@@ -17,6 +17,12 @@ jobs:
     - name: Show disk before cleanup
       run: df -h
 
+    - name: Super aggressive disk cleanup
+      uses: AdityaGarg8/remove-unwanted-software@v5  # 或最新 tag
+      with:
+        remove-android: 'true'
+        remove-dotnet: 'true'
+        remove-haskell: 'true'
     - name: Aggressive cleanup for Docker pull
       run: |
        docker system prune --all --force --volumes
